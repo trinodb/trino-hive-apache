@@ -8,13 +8,13 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.facebook.presto.hive</groupId>
+    <groupId>io.prestosql.hive</groupId>
     <artifactId>hive-apache</artifactId>
     <version>1.2.2-3-SNAPSHOT</version>
 
     <name>hive-apache</name>
     <description>Shaded version of Apache Hive for Presto</description>
-    <url>https://github.com/prestodb/presto-hive-apache</url>
+    <url>https://github.com/prestosql/presto-hive-apache</url>
 
     <inceptionYear>2013</inceptionYear>
 
@@ -31,16 +31,16 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/prestodb/presto-hive-apache.git</connection>
-        <developerConnection>scm:git:git://github.com/prestodb/presto-hive-apache.git</developerConnection>
-        <url>https://github.com/prestodb/presto-hive-apache</url>
+        <connection>scm:git:git://github.com/prestosql/presto-hive-apache.git</connection>
+        <developerConnection>scm:git:git://github.com/prestosql/presto-hive-apache.git</developerConnection>
+        <url>https://github.com/prestosql/presto-hive-apache</url>
         <tag>HEAD</tag>
     </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetJdk>1.8</project.build.targetJdk>
-        <shadeBase>com.facebook.presto.hive.\$internal</shadeBase>
+        <shadeBase>io.prestosql.hive.\$internal</shadeBase>
         <dep.slf4j.version>1.6.6</dep.slf4j.version>
         <dep.hive.version>1.2.2</dep.hive.version>
         <dep.parquet.version>1.6.0</dep.parquet.version>
