@@ -10,7 +10,7 @@
 
     <groupId>io.prestosql.hive</groupId>
     <artifactId>hive-apache</artifactId>
-    <version>2.3.4-1</version>
+    <version>2.3.4-2-SNAPSHOT</version>
 
     <name>hive-apache</name>
     <description>Shaded version of Apache Hive for Presto</description>
@@ -34,7 +34,7 @@
         <connection>scm:git:git://github.com/prestosql/presto-hive-apache.git</connection>
         <developerConnection>scm:git:git://github.com/prestosql/presto-hive-apache.git</developerConnection>
         <url>https://github.com/prestosql/presto-hive-apache</url>
-        <tag>2.3.4-1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
