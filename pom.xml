@@ -10,7 +10,7 @@
 
     <groupId>io.prestosql.hive</groupId>
     <artifactId>hive-apache</artifactId>
-    <version>3.0.0-7-SNAPSHOT</version>
+    <version>3.1.2-1-SNAPSHOT</version>
 
     <name>hive-apache</name>
     <description>Shaded version of Apache Hive for Presto</description>
@@ -43,13 +43,12 @@
 
         <shadeBase>io.prestosql.hive.\$internal</shadeBase>
 
-        <dep.hive.version>3.0.0</dep.hive.version>
+        <dep.hive.version>3.1.2</dep.hive.version>
 
         <dep.avro.version>1.8.2</dep.avro.version>
-        <dep.jodd.version>3.5.2</dep.jodd.version>
         <dep.parquet.version>1.11.0</dep.parquet.version>
         <dep.protobuf.version>2.5.0</dep.protobuf.version>
-        <dep.slf4j.version>1.7.25</dep.slf4j.version>
+        <dep.slf4j.version>1.7.29</dep.slf4j.version>
     </properties>
 
     <dependencies>
@@ -286,10 +285,6 @@
                 <exclusion>
                     <groupId>org.apache.ivy</groupId>
                     <artifactId>ivy</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-httpclient</groupId>
-                    <artifactId>commons-httpclient</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>commons-io</groupId>
@@ -533,12 +528,6 @@
             <version>${dep.protobuf.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.jodd</groupId>
-            <artifactId>jodd-core</artifactId>
-            <version>${dep.jodd.version}</version>
-        </dependency>
-
         <!-- hadoop compilation dependency for CodecPool -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -678,10 +667,6 @@
                                     <shadedPattern>${shadeBase}.org.tukaani.xz</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>jodd</pattern>
-                                    <shadedPattern>${shadeBase}.jodd</shadedPattern>
-                                </relocation>
-                                <relocation>
                                     <pattern>com.codahale.metrics</pattern>
                                     <shadedPattern>${shadeBase}.com.codahale.metrics</shadedPattern>
                                 </relocation>
@@ -725,6 +710,7 @@
                                         <exclude>hive-exec-log4j2.properties</exclude>
                                         <exclude>tez-container-log4j2.properties</exclude>
                                         <exclude>org/apache/hadoop/hive/ql/io/CodecPool*.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/ql/io/parquet/timestamp/NanoTimeUtils.class</exclude>
                                         <exclude>org/apache/tez/**</exclude>
                                     </excludes>
                                 </filter>
