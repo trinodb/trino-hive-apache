@@ -47,7 +47,7 @@
 
         <dep.avro.version>1.8.2</dep.avro.version>
         <dep.jodd.version>3.5.2</dep.jodd.version>
-        <dep.parquet.version>1.10.1</dep.parquet.version>
+        <dep.parquet.version>1.11.0</dep.parquet.version>
         <dep.protobuf.version>2.5.0</dep.protobuf.version>
         <dep.slf4j.version>1.7.25</dep.slf4j.version>
     </properties>
@@ -443,6 +443,16 @@
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-common</artifactId>
             <version>${dep.parquet.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.annotation</groupId>
+                    <artifactId>javax.annotation-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.yetus</groupId>
+                    <artifactId>audience-annotations</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -672,10 +682,6 @@
                                     <shadedPattern>${shadeBase}.it.unimi.dsi.fastutil</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>org.apache.parquet.it.unimi.dsi.fastutil</pattern>
-                                    <shadedPattern>${shadeBase}.parquet.it.unimi.dsi.fastutil</shadedPattern>
-                                </relocation>
-                                <relocation>
                                     <pattern>shaded.parquet</pattern>
                                     <shadedPattern>${shadeBase}.parquet</shadedPattern>
                                 </relocation>
@@ -742,29 +748,24 @@
                                     <artifact>org.apache.parquet:parquet-avro</artifact>
                                     <excludes>
                                         <exclude>stringBehavior.avsc</exclude>
-                                        <exclude>avro/org/apache/parquet/avro/StringBehaviorTest.java</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.parquet:parquet-column</artifact>
+                                    <excludes>
+                                        <exclude>shaded/parquet/it/unimi/dsi/fastutil/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.parquet:parquet-hadoop</artifact>
+                                    <excludes>
+                                        <exclude>shaded/parquet/it/unimi/dsi/fastutil/**</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
                                     <artifact>org.apache.commons:commons-lang3</artifact>
                                     <excludes>
                                         <exclude>templates/release-notes.vm</exclude>
-                                    </excludes>
-                                </filter>
-                                <filter>
-                                    <artifact>it.unimi.dsi:fastutil</artifact>
-                                    <excludes>
-                                        <exclude>CHANGES</exclude>
-                                        <exclude>LICENSE-2.0</exclude>
-                                        <exclude>README.md</exclude>
-                                        <exclude>build.properties</exclude>
-                                        <exclude>build.xml</exclude>
-                                        <exclude>drv/**</exclude>
-                                        <exclude>fastutil.bnd</exclude>
-                                        <exclude>gencsource.sh</exclude>
-                                        <exclude>ivy.xml</exclude>
-                                        <exclude>makefile</exclude>
-                                        <exclude>pom.xml</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
