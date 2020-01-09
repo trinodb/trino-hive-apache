@@ -678,10 +678,6 @@
                                     <shadedPattern>${shadeBase}.avro</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>it.unimi.dsi.fastutil</pattern>
-                                    <shadedPattern>${shadeBase}.it.unimi.dsi.fastutil</shadedPattern>
-                                </relocation>
-                                <relocation>
                                     <pattern>shaded.parquet</pattern>
                                     <shadedPattern>${shadeBase}.parquet</shadedPattern>
                                 </relocation>
