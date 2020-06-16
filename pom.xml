@@ -527,6 +527,23 @@
             <version>${dep.jodd.version}</version>
         </dependency>
 
+        <!-- use newer ORC version -->
+        <dependency>
+            <groupId>org.apache.orc</groupId>
+            <artifactId>orc-core</artifactId>
+            <version>1.6.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jetbrains</groupId>
+                    <artifactId>annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <!-- hadoop compilation dependency for CodecPool -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -597,7 +614,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -612,6 +629,7 @@
                             <artifactSet>
                                 <excludes>
                                     <exclude>joda-time:joda-time</exclude>
+                                    <exclude>org.threeten:threeten-extra</exclude>
                                     <exclude>org.apache.thrift:libthrift</exclude>
                                     <exclude>io.airlift:aircompressor</exclude>
                                 </excludes>
@@ -742,6 +760,12 @@
                                     <artifact>org.apache.avro:avro</artifact>
                                     <excludes>
                                         <exclude>overview.html</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.orc:orc-core</artifact>
+                                    <excludes>
+                                        <exclude>io/airlift/slice/**</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
