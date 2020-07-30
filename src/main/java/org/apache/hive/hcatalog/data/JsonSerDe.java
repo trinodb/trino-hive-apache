@@ -149,7 +149,7 @@ public class JsonSerDe extends AbstractSerDe {
       throw new SerDeException(e);
     }
 
-    jsonFactory = new JsonFactory();
+    jsonFactory = new JsonFactory().disable(JsonParser.Feature.CANONICALIZE_FIELD_NAMES);
     tsParser = new TimestampParser(
         HiveStringUtils.splitAndUnEscape(tbl.getProperty(serdeConstants.TIMESTAMP_FORMATS)));
   }
