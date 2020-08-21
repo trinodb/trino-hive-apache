@@ -430,7 +430,8 @@ struct Table {
   15: optional bool rewriteEnabled,     // rewrite enabled or not
   16: optional CreationMetadata creationMetadata,   // only for MVs, it stores table names used and txn list at MV creation
   17: optional string catName,          // Name of the catalog the table is in
-  18: optional PrincipalType ownerType = PrincipalType.USER // owner type of this table (default to USER for backward compatibility)
+  18: optional PrincipalType ownerType = PrincipalType.USER, // owner type of this table (default to USER for backward compatibility)
+  19: optional i64 writeId=-1
 }
 
 struct Partition {
@@ -1228,6 +1229,22 @@ struct GetTablesResult {
   1: required list<Table> tables
 }
 
+struct AlterTableRequest {
+  1: optional string catName,
+  2: required string dbName,
+  3: required string tableName,
+  4: required Table table,
+  5: optional EnvironmentContext environmentContext,
+  6: optional i64 writeId=-1,
+  7: optional string validWriteIdList
+  8: optional list<string> processorCapabilities,
+  9: optional string processorIdentifier
+// TODO: also add cascade here, out of envCtx
+}
+
+struct AlterTableResponse {
+}
+
 // Request type for cm_recycle
 struct CmRecycleRequest {
   1: required string dataPath,
@@ -1751,6 +1768,9 @@ service ThriftHiveMetastore extends fb303.FacebookService
   // alter table not only applies to future partitions but also cascade to existing partitions
   void alter_table_with_cascade(1:string dbname, 2:string tbl_name, 3:Table new_tbl, 4:bool cascade)
                        throws (1:InvalidOperationException o1, 2:MetaException o2)
+  AlterTableResponse alter_table_req(1:AlterTableRequest req)
+                       throws (1:InvalidOperationException o1, 2:MetaException o2)
+
   // the following applies to only tables that have partitions
   // * See notes on DDL_TIME
   Partition add_partition(1:Partition new_part)
