@@ -573,6 +573,19 @@ struct AggrStats {
 2: required i64 partsFound // number of partitions for which stats were found
 }
 
+struct AlterPartitionsRequest {
+1: optional string catName,
+2: required string dbName,
+3: required string tableName,
+4: required list<Partition> partitions,
+5: optional EnvironmentContext environmentContext,
+6: optional i64 writeId=-1,
+7: optional string validWriteIdList
+}
+
+struct AlterPartitionsResponse {
+}
+
 struct SetPartitionsStatsRequest {
 1: required list<ColumnStatistics> colStats,
 2: optional bool needMerge //stats need to be merged with the existing stats
@@ -1898,6 +1911,9 @@ service ThriftHiveMetastore extends fb303.FacebookService
       2:string tbl_name, 3:Partition new_part,
       4:EnvironmentContext environment_context)
       throws (1:InvalidOperationException o1, 2:MetaException o2)
+
+  AlterPartitionsResponse alter_partitions_req(1:AlterPartitionsRequest req)
+                       throws (1:InvalidOperationException o1, 2:MetaException o2)
 
   // rename the old partition to the new partition object by changing old part values to the part values
   // in the new_part. old partition is identified from part_vals.
