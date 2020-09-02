@@ -443,7 +443,8 @@ struct Partition {
   6: StorageDescriptor   sd,
   7: map<string, string> parameters,
   8: optional PrincipalPrivilegeSet privileges,
-  9: optional string catName
+  9: optional string catName,
+  10: optional i64 writeId=-1
 }
 
 struct PartitionWithoutSD {
