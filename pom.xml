@@ -45,7 +45,7 @@
 
         <dep.hive.version>3.1.2</dep.hive.version>
 
-        <dep.avro.version>1.8.2</dep.avro.version>
+        <dep.avro.version>1.9.2</dep.avro.version>
         <dep.parquet.version>1.11.0</dep.parquet.version>
         <dep.protobuf.version>2.5.0</dep.protobuf.version>
         <dep.slf4j.version>1.7.29</dep.slf4j.version>
@@ -519,6 +519,10 @@
                     <groupId>org.apache.avro</groupId>
                     <artifactId>avro-ipc</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.apache.avro</groupId>
+                    <artifactId>avro-ipc-jetty</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -526,6 +530,12 @@
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
             <version>${dep.protobuf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
         </dependency>
 
         <!-- hadoop compilation dependency for CodecPool -->
@@ -699,16 +709,8 @@
                                     <shadedPattern>${shadeBase}.au.com.bytecode.opencsv</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>org.tukaani.xz</pattern>
-                                    <shadedPattern>${shadeBase}.org.tukaani.xz</shadedPattern>
-                                </relocation>
-                                <relocation>
                                     <pattern>com.codahale.metrics</pattern>
                                     <shadedPattern>${shadeBase}.com.codahale.metrics</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>avro.shaded</pattern>
-                                    <shadedPattern>${shadeBase}.avro</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>shaded.parquet</pattern>
