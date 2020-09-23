@@ -3,6 +3,7 @@ package org.apache.hadoop.hive.ql.io.parquet.timestamp;
 import org.apache.hadoop.hive.common.type.Timestamp;
 
 import static java.lang.Math.floorDiv;
+import static java.lang.Math.floorMod;
 import static java.lang.Math.toIntExact;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -19,7 +20,7 @@ public final class NanoTimeUtils
         int epochDay = toIntExact(floorDiv(epochSeconds, SECONDS_PER_DAY));
         int julianDay = JULIAN_EPOCH_OFFSET_DAYS + epochDay;
 
-        long timeOfDaySeconds = epochSeconds - epochDay * SECONDS_PER_DAY;
+        long timeOfDaySeconds = floorMod(epochSeconds, SECONDS_PER_DAY);
         long timeOfDayNanos = SECONDS.toNanos(timeOfDaySeconds) + timestamp.getNanos();
 
         return new NanoTime(julianDay, timeOfDayNanos);
