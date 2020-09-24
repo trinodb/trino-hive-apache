@@ -47,7 +47,7 @@
 
         <dep.avro.version>1.9.2</dep.avro.version>
         <dep.hadoop.version>3.1.4</dep.hadoop.version>
-        <dep.parquet.version>1.11.0</dep.parquet.version>
+        <dep.parquet.version>1.11.1</dep.parquet.version>
         <dep.protobuf.version>2.5.0</dep.protobuf.version>
         <dep.slf4j.version>1.7.29</dep.slf4j.version>
     </properties>
@@ -807,18 +807,6 @@
                                     <artifact>org.apache.parquet:parquet-avro</artifact>
                                     <excludes>
                                         <exclude>stringBehavior.avsc</exclude>
-                                    </excludes>
-                                </filter>
-                                <filter>
-                                    <artifact>org.apache.parquet:parquet-column</artifact>
-                                    <excludes>
-                                        <exclude>shaded/parquet/it/unimi/dsi/fastutil/**</exclude>
-                                    </excludes>
-                                </filter>
-                                <filter>
-                                    <artifact>org.apache.parquet:parquet-hadoop</artifact>
-                                    <excludes>
-                                        <exclude>shaded/parquet/it/unimi/dsi/fastutil/**</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
