@@ -46,6 +46,7 @@
         <dep.hive.version>3.1.2</dep.hive.version>
 
         <dep.avro.version>1.9.2</dep.avro.version>
+        <dep.hadoop.version>3.1.4</dep.hadoop.version>
         <dep.parquet.version>1.11.0</dep.parquet.version>
         <dep.protobuf.version>2.5.0</dep.protobuf.version>
         <dep.slf4j.version>1.7.29</dep.slf4j.version>
@@ -538,11 +539,24 @@
             <version>1.9.13</version>
         </dependency>
 
-        <!-- hadoop compilation dependency for CodecPool -->
+        <!-- Hadoop compilation dependencies -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>0.20.2</version>
+            <artifactId>hadoop-common</artifactId>
+            <version>${dep.hadoop.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-core</artifactId>
+            <version>${dep.hadoop.version}</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
@@ -748,6 +762,7 @@
                                         <exclude>hive-exec-log4j2.properties</exclude>
                                         <exclude>tez-container-log4j2.properties</exclude>
                                         <exclude>org/apache/hadoop/hive/ql/io/CodecPool*.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/ql/io/avro/AvroGenericRecordReader*.class</exclude>
                                         <exclude>org/apache/hadoop/hive/ql/io/parquet/timestamp/NanoTimeUtils.class</exclude>
                                         <exclude>org/apache/tez/**</exclude>
                                     </excludes>
