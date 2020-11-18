@@ -761,9 +761,12 @@
                                         <exclude>META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat</exclude>
                                         <exclude>hive-exec-log4j2.properties</exclude>
                                         <exclude>tez-container-log4j2.properties</exclude>
-                                        <exclude>org/apache/hadoop/hive/ql/io/CodecPool*.class</exclude>
-                                        <exclude>org/apache/hadoop/hive/ql/io/avro/AvroGenericRecordReader*.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/ql/io/avro/AvroGenericRecordReader.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/ql/io/avro/AvroGenericRecordReader$*.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/ql/io/CodecPool.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/ql/io/CodecPool$*.class</exclude>
                                         <exclude>org/apache/hadoop/hive/ql/io/parquet/timestamp/NanoTimeUtils.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/ql/io/parquet/timestamp/NanoTimeUtils$*.class</exclude>
                                         <exclude>org/apache/tez/**</exclude>
                                     </excludes>
                                 </filter>
@@ -777,16 +780,21 @@
                                 <filter>
                                     <artifact>org.apache.hive:hive-serde</artifact>
                                     <excludes>
-                                        <exclude>org/apache/hadoop/hive/serde2/avro/AvroDeserializer*.class</exclude>
-                                        <exclude>org/apache/hadoop/hive/serde2/avro/InstanceCache*.class</exclude>
-                                        <exclude>org/apache/hadoop/hive/serde2/avro/SchemaToTypeInfo*.class</exclude>
-                                        <exclude>org/apache/hadoop/hive/serde2/avro/TypeInfoToSchema*.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/serde2/avro/AvroDeserializer.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/serde2/avro/AvroDeserializer$*.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/serde2/avro/InstanceCache.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/serde2/avro/InstanceCache$*.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/serde2/avro/SchemaToTypeInfo.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/serde2/avro/SchemaToTypeInfo$*.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/serde2/avro/TypeInfoToSchema.class</exclude>
+                                        <exclude>org/apache/hadoop/hive/serde2/avro/TypeInfoToSchema$*.class</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
                                     <artifact>org.apache.hive.hcatalog:hive-hcatalog-core</artifact>
                                     <excludes>
-                                        <exclude>org/apache/hive/hcatalog/data/JsonSerDe*.class</exclude>
+                                        <exclude>org/apache/hive/hcatalog/data/JsonSerDe.class</exclude>
+                                        <exclude>org/apache/hive/hcatalog/data/JsonSerDe$*.class</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
