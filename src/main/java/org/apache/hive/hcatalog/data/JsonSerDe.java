@@ -148,8 +148,8 @@ public class JsonSerDe extends AbstractSerDe {
     } catch (HCatException e) {
       throw new SerDeException(e);
     }
-
-    jsonFactory = new JsonFactory().disable(JsonParser.Feature.CANONICALIZE_FIELD_NAMES);
+    // Interning all encountered field names improves little compared to the per-factory canonical name cache and can cause native memory issues
+    jsonFactory = new JsonFactory().disable(JsonParser.Feature.INTERN_FIELD_NAMES);
     tsParser = new TimestampParser(
         HiveStringUtils.splitAndUnEscape(tbl.getProperty(serdeConstants.TIMESTAMP_FORMATS)));
   }
@@ -177,6 +177,9 @@ public class JsonSerDe extends AbstractSerDe {
         // iterate through each token, and create appropriate object here.
         populateRecord(r, token, p, schema);
       }
+      // Calling close on the parser even though there is no real InputStream backing it is necessary so that
+      // entries in this parser instance's canonical field name cache can be reused on the next invocation
+      p.close();
     } catch (JsonParseException e) {
       LOG.warn("Error [{}] parsing json text [{}].", e, t);
       throw new SerDeException(e);
