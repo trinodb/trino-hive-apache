@@ -590,6 +590,13 @@ struct AlterPartitionsResponse {
 struct SetPartitionsStatsRequest {
 1: required list<ColumnStatistics> colStats,
 2: optional bool needMerge //stats need to be merged with the existing stats
+3: optional i64 writeId=-1,         // writeId for the current query that updates the stats
+4: optional string validWriteIdList, // valid write id list for the table for which this struct is being sent
+5: required string engine //engine creating the current request
+}
+
+struct SetPartitionsStatsResponse {
+1: required bool result;
 }
 
 // schema of the table/query results etc.
@@ -1975,6 +1982,11 @@ service ThriftHiveMetastore extends fb303.FacebookService
   bool update_table_column_statistics(1:ColumnStatistics stats_obj) throws (1:NoSuchObjectException o1,
               2:InvalidObjectException o2, 3:MetaException o3, 4:InvalidInputException o4)
   bool update_partition_column_statistics(1:ColumnStatistics stats_obj) throws (1:NoSuchObjectException o1,
+              2:InvalidObjectException o2, 3:MetaException o3, 4:InvalidInputException o4)
+
+  SetPartitionsStatsResponse update_table_column_statistics_req(1:SetPartitionsStatsRequest req) throws (1:NoSuchObjectException o1,
+              2:InvalidObjectException o2, 3:MetaException o3, 4:InvalidInputException o4)
+  SetPartitionsStatsResponse update_partition_column_statistics_req(1:SetPartitionsStatsRequest req) throws (1:NoSuchObjectException o1,
               2:InvalidObjectException o2, 3:MetaException o3, 4:InvalidInputException o4)
 
   // get APIs return the column statistics corresponding to db_name, tbl_name, [part_name], col_name if
