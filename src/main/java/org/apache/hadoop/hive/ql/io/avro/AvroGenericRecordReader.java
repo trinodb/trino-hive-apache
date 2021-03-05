@@ -28,6 +28,7 @@ import java.util.Properties;
 
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
+import org.apache.avro.file.FileReader;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.generic.GenericRecord;
@@ -59,7 +60,7 @@ public class AvroGenericRecordReader implements
         RecordReader<NullWritable, AvroGenericRecordWritable>, JobConfigurable {
   private static final Logger LOG = LoggerFactory.getLogger(AvroGenericRecordReader.class);
 
-  final private org.apache.avro.file.FileReader<GenericRecord> reader;
+  final private FileReader<GenericRecord> reader;
   final private long start;
   final private long stop;
   private ZoneId writerTimezone;
@@ -85,22 +86,38 @@ public class AvroGenericRecordReader implements
     if(latest != null) {
       gdr.setExpected(latest);
     }
+    FileReader<GenericRecord> reader = null;
+    try {
+      if (split.getLength() == 0) {
+        this.isEmptyInput = true;
+        this.start = 0;
+        this.reader = null;
+      }
+      else {
+        this.isEmptyInput = false;
+        reader = new DataFileReader<GenericRecord>(new FsInput(split.getPath(), job), gdr);
+        this.reader = reader;
+        this.reader.sync(split.getStart());
+        this.start = this.reader.tell();
+      }
+      this.stop = split.getStart() + split.getLength();
+      this.recordReaderID = new UID();
 
-    if (split.getLength() == 0) {
-      this.isEmptyInput = true;
-      this.start = 0;
-      this.reader = null;
+      this.writerTimezone = extractWriterTimezoneFromMetadata(job, split, gdr);
     }
-    else {
-      this.isEmptyInput = false;
-      this.reader = new DataFileReader<GenericRecord>(new FsInput(split.getPath(), job), gdr);
-      this.reader.sync(split.getStart());
-      this.start = reader.tell();
+    catch (Exception e) {
+      if (reader != null) {
+        try {
+          reader.close();
+        }
+        catch (Exception closeException) {
+          if (closeException != e) {
+            e.addSuppressed(closeException);
+          }
+        }
+      }
+      throw e;
     }
-    this.stop = split.getStart() + split.getLength();
-    this.recordReaderID = new UID();
-
-    this.writerTimezone = extractWriterTimezoneFromMetadata(job, split, gdr);
   }
 
   /**
