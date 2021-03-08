@@ -592,7 +592,6 @@ struct SetPartitionsStatsRequest {
 2: optional bool needMerge //stats need to be merged with the existing stats
 3: optional i64 writeId=-1,         // writeId for the current query that updates the stats
 4: optional string validWriteIdList, // valid write id list for the table for which this struct is being sent
-5: required string engine //engine creating the current request
 }
 
 struct SetPartitionsStatsResponse {
