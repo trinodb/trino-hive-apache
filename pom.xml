@@ -10,7 +10,7 @@
 
     <groupId>io.trino.hive</groupId>
     <artifactId>hive-apache</artifactId>
-    <version>3.1.2-12-SNAPSHOT</version>
+    <version>3.1.2-12</version>
 
     <name>hive-apache</name>
     <description>Shaded version of Apache Hive for Trino</description>
@@ -34,7 +34,7 @@
         <connection>scm:git:git://github.com/trinodb/trino-hive-apache.git</connection>
         <developerConnection>scm:git:git://github.com/trinodb/trino-hive-apache.git</developerConnection>
         <url>https://github.com/trinodb/trino-hive-apache</url>
-        <tag>HEAD</tag>
+        <tag>3.1.2-12</tag>
     </scm>
 
     <properties>
