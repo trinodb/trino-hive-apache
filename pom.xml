@@ -47,7 +47,7 @@
 
         <dep.avro.version>1.9.2</dep.avro.version>
         <dep.hadoop.version>3.1.4</dep.hadoop.version>
-        <dep.parquet.version>1.11.1</dep.parquet.version>
+        <dep.parquet.version>1.12.0</dep.parquet.version>
         <dep.protobuf.version>2.5.0</dep.protobuf.version>
         <dep.slf4j.version>1.7.29</dep.slf4j.version>
     </properties>
@@ -474,6 +474,10 @@
             <artifactId>parquet-hadoop</artifactId>
             <version>${dep.parquet.version}</version>
             <exclusions>
+                <exclusion>
+                    <groupId>com.github.luben</groupId>
+                    <artifactId>zstd-jni</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>org.xerial.snappy</groupId>
                     <artifactId>snappy-java</artifactId>
