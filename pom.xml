@@ -676,6 +676,10 @@
                             </artifactSet>
                             <relocations>
                                 <relocation>
+                                    <pattern>org.apache.orc</pattern>
+                                    <shadedPattern>io.trino.hive.orc</shadedPattern>
+                                </relocation>
+                                <relocation>
                                     <pattern>com.google.protobuf</pattern>
                                     <shadedPattern>${shadeBase}.com.google.protobuf</shadedPattern>
                                 </relocation>
