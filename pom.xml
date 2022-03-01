@@ -549,6 +549,23 @@
             </exclusions>
         </dependency>
 
+        <!-- use newer ORC version -->
+        <dependency>
+            <groupId>org.apache.orc</groupId>
+            <artifactId>orc-core</artifactId>
+            <version>1.7.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jetbrains</groupId>
+                    <artifactId>annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-mapreduce-client-core</artifactId>
@@ -654,7 +671,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -798,6 +815,12 @@
                                     <artifact>org.apache.avro:avro</artifact>
                                     <excludes>
                                         <exclude>overview.html</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.orc:orc-core</artifact>
+                                    <excludes>
+                                        <exclude>io/airlift/slice/**</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
