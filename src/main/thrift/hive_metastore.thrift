@@ -567,6 +567,8 @@ struct ColumnStatisticsDesc {
 struct ColumnStatistics {
 1: required ColumnStatisticsDesc statsDesc,
 2: required list<ColumnStatisticsObj> statsObj;
+3: optional bool isStatsCompliant,
+4: optional string engine = "hive" // Use hive stats
 }
 
 struct AggrStats {
@@ -736,6 +738,8 @@ struct TableStatsRequest {
  2: required string tblName,
  3: required list<string> colNames
  4: optional string catName
+ 5: optional string validWriteIdList,
+ 6: optional string engine = "hive" // Use hive stats
 }
 
 struct PartitionsStatsRequest {
@@ -744,6 +748,8 @@ struct PartitionsStatsRequest {
  3: required list<string> colNames,
  4: required list<string> partNames,
  5: optional string catName
+ 6: optional string validWriteIdList,
+ 7: optional string engine = "hive" // Use hive stats
 }
 
 // Return type for add_partitions_req
