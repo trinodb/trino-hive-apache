@@ -670,6 +670,7 @@
                                 <excludes>
                                     <exclude>joda-time:joda-time</exclude>
                                     <exclude>org.apache.thrift:libthrift</exclude>
+                                    <exclude>org.apache.avro:*</exclude>
                                     <exclude>io.airlift:aircompressor</exclude>
                                     <exclude>com.github.luben:zstd-jni</exclude>
                                 </excludes>
