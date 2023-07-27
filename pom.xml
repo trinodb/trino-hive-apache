@@ -453,10 +453,6 @@
             <version>${dep.parquet.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>javax.annotation</groupId>
-                    <artifactId>javax.annotation-api</artifactId>
-                </exclusion>
-                <exclusion>
                     <groupId>org.apache.yetus</groupId>
                     <artifactId>audience-annotations</artifactId>
                 </exclusion>
@@ -467,6 +463,12 @@
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-column</artifactId>
             <version>${dep.parquet.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.yetus</groupId>
+                    <artifactId>audience-annotations</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -474,6 +476,14 @@
             <artifactId>parquet-hadoop</artifactId>
             <version>${dep.parquet.version}</version>
             <exclusions>
+                <exclusion>
+                    <groupId>org.apache.yetus</groupId>
+                    <artifactId>audience-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.github.luben</groupId>
+                    <artifactId>zstd-jni</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>org.xerial.snappy</groupId>
                     <artifactId>snappy-java</artifactId>
@@ -671,8 +681,8 @@
                                     <exclude>joda-time:joda-time</exclude>
                                     <exclude>org.apache.thrift:libthrift</exclude>
                                     <exclude>org.apache.avro:*</exclude>
+                                    <exclude>org.apache.parquet:*</exclude>
                                     <exclude>io.airlift:aircompressor</exclude>
-                                    <exclude>com.github.luben:zstd-jni</exclude>
                                 </excludes>
                             </artifactSet>
                             <relocations>
@@ -727,10 +737,6 @@
                                 <relocation>
                                     <pattern>com.codahale.metrics</pattern>
                                     <shadedPattern>${shadeBase}.com.codahale.metrics</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>shaded.parquet</pattern>
-                                    <shadedPattern>${shadeBase}.parquet</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>org.slf4j</pattern>
@@ -803,12 +809,6 @@
                                     <artifact>org.apache.avro:avro</artifact>
                                     <excludes>
                                         <exclude>overview.html</exclude>
-                                    </excludes>
-                                </filter>
-                                <filter>
-                                    <artifact>org.apache.parquet:parquet-avro</artifact>
-                                    <excludes>
-                                        <exclude>stringBehavior.avsc</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
