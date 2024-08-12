@@ -11,5 +11,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 22
       - run: ./mvnw clean install -B -V
