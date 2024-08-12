@@ -21,4 +21,4 @@ package com.hadoop.compression.lzo;
 //  (e.g. sequence file) and provide no clean way for providing custom codec
 //  factory.
 public class LzoCodec
-        extends io.airlift.compress.lzo.LzoCodec {}
+        extends io.airlift.compress.v2.lzo.LzoCodec {}
